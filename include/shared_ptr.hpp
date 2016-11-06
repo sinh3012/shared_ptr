@@ -17,7 +17,7 @@ public:
 	auto unique() const->bool; /*noexcept*/
 	auto operator *() const->T &; /*strong*/
 	auto operator ->() const->T *; /*strong*/
-	auto operator bool() const->bool; /*noexcept*/
+	//auto operator bool() const->bool; /*noexcept*/
 	auto owner_before(shared_ptr const & temp) const->bool; /*noexcept*/
 private:
 	T * ptr_;
@@ -104,8 +104,8 @@ auto shared_ptr<T>::operator ->() const->T * {
 	else std::logic_error("ptr_=nullptr");
 }
 
-template <typename T>
-auto shared_ptr<T>::operator bool() const->bool { return !(ptr_ == nullptr); }
+/*template <typename T>
+auto shared_ptr<T>::operator bool() const->bool { return !(ptr_ == nullptr); }*/
 
 template <typename T>
 auto shared_ptr<T>::owner_before(shared_ptr const & temp) const->bool {
