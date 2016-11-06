@@ -28,7 +28,7 @@ private:
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 template <typename T>
-shared_ptr<T>::shared_ptr(T * ptr = nullptr) : ptr_(ptr), count_(ptr == nullptr ? nullptr : new size_t(1)) {}
+shared_ptr<T>::shared_ptr(T * ptr) : ptr_(ptr), count_(ptr == nullptr ? nullptr : new size_t(1)) {}
 
 template <typename T>
 shared_ptr<T>::~shared_ptr() {
