@@ -74,7 +74,7 @@ template <typename T>
 auto shared_ptr<T>::get() const->T * {return ptr_; }
 
 template <typename T>
-auto shared_ptr<T>::use_count() const->size_t { return (count_ == nullptr ? 0 : *count_; }
+auto shared_ptr<T>::use_count() const->size_t { return (count_ == nullptr ? 0 : *count_); }
 
 template <typename T>
 auto shared_ptr<T>::reset()->void {
