@@ -15,7 +15,7 @@ SCENARIO("Init with ptr", "[Init ptr]"){
   REQUIRE(*ptr == 404);
   REQUIRE(ptr.use_count() == 1);
   REQUIRE(ptr.unique() == true);
-**  REQUIRE(bool(ptr) == true);
+//  REQUIRE(bool(ptr) == true);
 }
 
 SCENARIO("Copy init", "[Copy init]"){
