@@ -19,7 +19,6 @@ public:
 	auto operator *() const->T &; /*strong*/
 	auto operator ->() const->T *; /*strong*/
 	operator bool() const; /*noexcept*/
-	//auto owner_before(shared_ptr const & temp) const->bool; /*noexcept*/
 private:
 	T * ptr_;
 	size_t * count_;
@@ -107,14 +106,6 @@ auto shared_ptr<T>::operator ->() const->T * {
 
 template <typename T>
 shared_ptr<T>::operator bool() const { return !(ptr_ == nullptr); }
-
-/*template <typename T>
-auto shared_ptr<T>::owner_before(shared_ptr const & temp) const->bool {
-	if (temp.ptr_ < ptr_) {
-		return true;
-	}
-	else return false;
-}*/
 
 template<class T, class ...Args>
 shared_ptr<T> make_shared(Args && ...args) {
