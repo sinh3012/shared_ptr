@@ -31,7 +31,7 @@ shared_ptr<T>::shared_ptr(T * ptr = nullptr) : ptr_(ptr), count_(ptr == nullptr 
 
 template <typename T>
 shared_ptr<T>::~shared_ptr() {
-	if (count && --(*count_) == 0 && ptr_) {
+	if (count_ && --(*count_) == 0 && ptr_) {
 		delete ptr_;
 		delete count_;
 	}
@@ -53,7 +53,7 @@ shared_ptr<T>::shared_ptr(shared_ptr const & temp) : ptr_(temp.ptr_), count_(tem
 template <typename T>
 auto shared_ptr<T>::operator =(shared_ptr const & temp)->shared_ptr & {
 	if (this != &temp) {
-		(shared_ptr<T>(temp)).swap(this);
+		(shared_ptr<T>(temp)).swap(*this);
 	}
 	return *this;
 }
@@ -64,7 +64,7 @@ shared_ptr<T>::shared_ptr(shared_ptr const && temp) : shared_ptr() { swap(temp);
 template <typename T>
 auto shared_ptr<T>::operator =(shared_ptr const && temp)->shared_ptr & {
 	if (this != &temp) {
-		swap(other);
+		swap(temp);
 	}
 	return *this;
 }
@@ -98,7 +98,7 @@ auto shared_ptr<T>::operator *() const->T & {
 
 template <typename T>
 auto shared_ptr<T>::operator ->() const->T * {
-	if (ptr_ != nullpt r) {
+	if (ptr_ != nullptr) {
 		return ptr_;
 	}
 	else std::logic_error("ptr_=nullptr");
