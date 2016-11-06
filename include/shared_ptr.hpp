@@ -110,7 +110,7 @@ shared_ptr<T>::operator bool() const { return !(ptr_ == nullptr); }
 
 template <typename T>
 auto shared_ptr<T>::owner_before(shared_ptr const & temp) const->bool {
-	if (temp.ptr_ == ptr_) {
+	if (temp.ptr_ < ptr_) {
 		return true;
 	}
 	else return false;
