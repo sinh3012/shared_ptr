@@ -29,7 +29,7 @@ SCENARIO("Copy init", "[Copy init]"){
 SCENARIO("Copy operator", "[Copy operator]"){
   shared_ptr<int> ptr(new int(404));
   shared_ptr<int> ptr1;
-  ptr = ptr1;
+  ptr1 = ptr;
   REQUIRE(*ptr1 == 404);
   REQUIRE(ptr1.use_count() == 2);
   REQUIRE(ptr1.unique() == false);
