@@ -7,7 +7,7 @@ SCENARIO("Init", "[Init]"){
   REQUIRE(ptr.get() == nullptr);
   REQUIRE(ptr.use_count() == 0);
   REQUIRE(ptr.unique() == false);
- // REQUIRE(bool(ptr) == false);
+  REQUIRE(bool(ptr) == false);
 }
 
 SCENARIO("Init with ptr", "[Init ptr]"){
@@ -15,7 +15,7 @@ SCENARIO("Init with ptr", "[Init ptr]"){
   REQUIRE(*ptr == 404);
   REQUIRE(ptr.use_count() == 1);
   REQUIRE(ptr.unique() == true);
-//  REQUIRE(bool(ptr) == true);
+  REQUIRE(bool(ptr) == true);
 }
 
 SCENARIO("Copy init", "[Copy init]"){
@@ -69,7 +69,7 @@ SCENARIO("owner_before", "[owner_before]"){
   shared_ptr<int> ptr1(ptr);
   shared_ptr<int> ptr2(new int(405));
   REQUIRE(ptr.owner_before(ptr1));
-  REQUIRE(ptr.owner_before(ptr2));
+  REQUIRE(!ptr.owner_before(ptr2));
 }
 
 SCENARIO("Swap", "[Swap]"){
