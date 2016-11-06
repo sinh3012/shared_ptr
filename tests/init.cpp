@@ -64,14 +64,6 @@ SCENARIO("Reset", "[Reset]"){
   REQUIRE(ptr1.unique() == true);
 }
 
-/*SCENARIO("owner_before", "[owner_before]"){
-  shared_ptr<int> ptr(new int(404));
-  shared_ptr<int> ptr1(ptr);
-  shared_ptr<int> ptr2(new int(405));
-  REQUIRE(ptr.owner_before(ptr1));
-  REQUIRE(!ptr.owner_before(ptr2));
-}*/
-
 SCENARIO("Swap", "[Swap]"){
   shared_ptr<int> ptr(new int(404));
   shared_ptr<int> ptr1(new int(24));
