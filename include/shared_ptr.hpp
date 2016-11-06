@@ -60,10 +60,10 @@ auto shared_ptr<T>::operator =(shared_ptr const & temp)->shared_ptr & {
 }
 
 template <typename T>
-shared_ptr<T>::shared_ptr(shared_ptr const && temp) : shared_ptr() { swap(temp); }
+shared_ptr<T>::shared_ptr(shared_ptr && temp) : shared_ptr() { swap(temp); }
 
 template <typename T>
-auto shared_ptr<T>::operator =(shared_ptr const && temp)->shared_ptr & {
+auto shared_ptr<T>::operator =(shared_ptr && temp)->shared_ptr & {
 	if (this != &temp) {
 		swap(temp);
 	}
