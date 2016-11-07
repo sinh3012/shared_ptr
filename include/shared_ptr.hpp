@@ -14,7 +14,7 @@ public:
 	auto swap(shared_ptr & temp)->void; /*noexcept*/
 	auto get() const->T *; /*noexcept*/
 	auto use_count() const->size_t; /*noexcept*/
-	auto reset()->void; /*noexcept*/
+	auto reset(T * ptr = nullptr)->void; /*noexcept*/
 	auto unique() const->bool; /*noexcept*/
 	auto operator *() const->T &; /*strong*/
 	auto operator ->() const->T *; /*strong*/
@@ -51,7 +51,7 @@ shared_ptr<T>::shared_ptr(shared_ptr const & temp) : ptr_(temp.ptr_), count_(tem
 }
 
 template <typename T>
-auto shared_ptr<T>::operator =(shared_ptr const & temp)->shared_ptr & {
+auto shared_ptr<T>::operator =(shared_ptr const & temp)->shared_ptr & 
 	if (this != &temp) {
 		(shared_ptr<T>(temp)).swap(*this);
 	}
@@ -76,13 +76,11 @@ template <typename T>
 auto shared_ptr<T>::use_count() const->size_t { return (count_ == nullptr ? 0 : *count_); }
 
 template <typename T>
-auto shared_ptr<T>::reset()->void {
-	if (count_ && --(*count_) == 0 && ptr_) {
-		delete ptr_;
-		delete count_;
+auto shared_ptr<T>::reset(T * ptr)->void {
+	if (ptr_ != ptr) {
+		(shared_ptr<T>(ptr)).swap(*this);
 	}
-	ptr_ = nullptr;
-	count_ = nullptr;
+return *this;
 }
 
 template <typename T>
