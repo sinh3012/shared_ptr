@@ -90,7 +90,7 @@ auto shared_ptr<T>::operator *() const->T & {
 	if (ptr_ != nullptr) {
 		return *ptr_;
 	}
-	else std::logic_error("ptr_=nullptr");
+	else throw std::logic_error("ptr_=nullptr");
 }
 
 template <typename T>
@@ -98,11 +98,11 @@ auto shared_ptr<T>::operator ->() const->T * {
 	if (ptr_ != nullptr) {
 		return ptr_;
 	}
-	else std::logic_error("ptr_=nullptr");
+	else throw std::logic_error("ptr_=nullptr");
 }
 
 template <typename T>
-shared_ptr<T>::operator bool() const { return !(ptr_ == nullptr); }
+shared_ptr<T>::operator bool() const { return (ptr_ != nullptr); }
 
 template<class T, class ...Args>
 shared_ptr<T> make_shared(Args && ...args) {
