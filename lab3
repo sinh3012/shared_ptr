@@ -1,0 +1,52 @@
+<html>
+<body>
+<table>
+<tr>
+<tr><canvas id='lab02' height='544' width='1200' style='border:1px solid;'></tr>
+<tr><canvas id='lab03' height='544' width='1200' style='border:1px solid;'></tr>
+</tr>
+</table>
+
+<script>
+	let canvas = document.getElementById('lab02');
+	let ctx = canvas.getContext('2d');
+	let canvas1 = document.getElementById('lab03');
+	let ctx1 = canvas1.getContext('2d');
+
+	let img = new Image();
+	img.crossOrigin = '';
+	img.src="big_1443143054_image.jpg";
+	img.onload = function() {
+		ctx.drawImage(img,0,0);
+	}
+	function Sobel() {
+		let pix = ctx.getImageData(0,0,canvas.width, canvas.height);
+		let arr = pix.data;
+		for (y=1;y<canvas.height-1;y++) {
+			for (x=1;x<canvas.width-1;x++) {
+/*
+			Ry=-1*arr[(x-1+(y-1)*canvas.width)*4]-2*arr[(x+(y-1)*canvas.width)*4]-arr[(x+1+(y-1)*canvas.width)*4]+arr[(x-1+(y+1)*canvas.width)*4]+2*arr[(x+(y+1)*canvas.width)*4]+arr[(x+1+(y+1)*canvas.width)*4];
+	Rx=-1*arr[(x-1+(y-1)*canvas.width)*4]+arr[(x+1+(y-1)*canvas.width)*4]-2*arr[(x-1+y*canvas.width)*4]+2*arr[(x+1+y*canvas.width)*4]-arr[(x-1+(y+1)*canvas.width)*4]+arr[(x+1+(y+1)*canvas.width)*4];
+				arr[(x+y*canvas.width)*4+3]=Math.sqrt(Rx*Rx+Ry*Ry);
+				arr[(x+y*canvas.width)*4+1]=Math.sqrt(Rx*Rx+Ry*Ry);
+ 				arr[(x+y*canvas.width)*4+2]=Math.sqrt(Rx*Rx+Ry*Ry);
+				arr[(x+y*canvas.width)*4+3]=Math.sqrt(Rx*Rx+Ry*Ry);
+
+			/*Gy=-1*arr[(x-1+(y-1)*canvas.width)*4+1]-2*arr[(x+(y-1)*canvas.width)*4+1]-arr[(x+1+(y-1)*canvas.width)*4+1]+arr[(x-1+(y+1)*canvas.width)*4+1]+2*arr[(x+(y+1)*canvas.width)*4+1]+arr[(x+1+(y+1)*canvas.width)*4+1];
+	Gx=-1*arr[(x-1+(y-1)*canvas.width)*4+1]+arr[(x+1+(y-1)*canvas.width)*4+1]-2*arr[(x-1+y*canvas.width)*4+1]+2*arr[(x+1+y*canvas.width)*4+1]-arr[(x-1+(y+1)*canvas.width)*4+1]+arr[(x+1+(y+1)*canvas.width)*4+1];
+				arr[(x+y*canvas.width)*4+1]=Math.sqrt(Gx*Gx+Gy*Gy);       */
+
+
+				By=-1*arr[(x-1+(y-1)*canvas.width+2)*4]-2*arr[(x+(y-1)*canvas.width)*4+2]-arr[(x+1+(y-1)*canvas.width)*4+2]+arr[(x-1+(y+1)*canvas.width)*4+2]+2*arr[(x+(y+1)*canvas.width)*4+2]+arr[(x+1+(y+1)*canvas.width)*4+2];
+	Bx=-1*arr[(x-1+(y-1)*canvas.width)*4+2]+arr[(x+1+(y-1)*canvas.width)*4+2]-2*arr[(x-1+y*canvas.width)*4+2]+2*arr[(x+1+y*canvas.width)*4+2]-arr[(x-1+(y+1)*canvas.width)*4+2]+arr[(x+1+(y+1)*canvas.width)*4+2];
+				arr[(x+y*canvas.width)*4+3]=Math.sqrt(Bx*Bx+By*By)
+				
+			
+			}
+		}
+		ctx1.putImageData(pix, 0, 0);
+	}
+	canvas.addEventListener('click', Sobel);	
+</script>
+</body>
+</html>
